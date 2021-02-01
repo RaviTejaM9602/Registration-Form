@@ -1,0 +1,21 @@
+Problem Statement:
+
+Implement registration module with the following fields, 
+
+username, password, emailid, mobile number,
+
+store the users in local storage.
+
+Implement login module with the following fields,
+
+emailid, password,
+
+validate emailid, password with registered users.
+
+
+Implement forgot password. If the user enters the 
+emailid, we should display the password on the screen.
+
+
+Implement change password.
+

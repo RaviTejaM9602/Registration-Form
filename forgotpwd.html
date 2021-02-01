@@ -1,0 +1,70 @@
+<html>
+
+  <head>
+
+  </head>
+
+   <body>
+         <form>
+
+              emailId: <input type="text" id="emailId"> <br><br>
+
+              <button onclick="forgotPwd()">Forgot PWD</button>
+
+         </form>
+
+          <script>
+
+                 function forgotPwd(){
+                         event.preventDefault();
+
+                         var emailId=document.getElementById("emailId").value;
+
+                          var emailExists= isEmailExists(emailId);
+
+                          if(emailExists){
+                             
+                            var users=JSON.parse(localStorage.getItem('users'));
+
+                                    for(var i=0; i<users.length;i++){
+
+                                     var currentUser= users[i];
+
+                                       if(currentUser.email ==  emailId){
+                                           alert(currentUser.pass);
+                                       }
+                          }
+                 }
+                 else
+                 {
+                      alert("this email id does not exist in LC")
+                 }
+                 }
+
+          
+          function isEmailExists(emailId){
+
+if(localStorage.getItem('users') !=null){
+
+var users=JSON.parse(localStorage.getItem('users'));
+
+   for(var i=0; i<users.length;i++){
+
+   var currentUser= users[i];
+
+   if(currentUser.email == emailId){
+     return true;
+   }
+
+}
+return false;
+}
+         }
+          
+          </script>
+
+    </body>
+
+
+    </html>
+

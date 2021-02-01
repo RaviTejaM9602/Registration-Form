@@ -1,0 +1,127 @@
+<html>
+
+  <head>
+
+  </head>
+
+   <body>
+
+         <form>
+
+             Username: <input type="text" id="username"> <br><br>
+
+             Password: <input type="password" id="password"><br><br>
+
+             emailId: <input type="text" id="emailId"> <br><br>
+
+              mobileNumber: <input type="text" id="mno"><br><br>
+
+              <button onclick="register()">Register</button>
+
+         </form>
+
+          <script>
+
+                 function getValueById(id){
+                return document.getElementById(id).value;
+                 }
+
+
+                 if(localStorage.getItem("users") == null){
+
+                      var array=JSON.stringify([]);
+
+                     localStorage.setItem('users',array);
+
+                 }
+                 function register(){
+
+                     event.preventDefault();
+
+                    var username= getValueById("username");
+                    var password=getValueById("password");
+                    var emailId=getValueById("emailId");
+                    var mno=getValueById("mno");
+
+                        
+                        var userExists= isUsernameExists(username);
+
+                         if(userExists == true){
+                            alert("this username already exists!");
+                            return;
+                         }
+
+                         var emailExists= isEmailExists(emailId);
+
+                         if(emailExists){
+                            alert("this emailid already exists!");
+                            return; 
+                         }
+
+                    var user={
+                         uname:username,
+                         pass: password,
+                         email: emailId,
+                         mobileNumber: mno
+
+                    }
+                    console.log(user);
+
+                     var allUsers=JSON.parse(localStorage.getItem('users'));
+
+                      console.log("allUsers",typeof allUsers);
+
+                      allUsers.push(user);
+
+                      console.log("allUsers",allUsers);
+
+                      localStorage.setItem('users',JSON.stringify(allUsers));
+
+                 }
+
+                   function isUsernameExists(username){
+
+                          if(localStorage.getItem('users') !=null){
+
+                                var users=JSON.parse(localStorage.getItem('users'));
+
+                              for(var i=0; i<users.length;i++){
+
+                                     var currentUser= users[i];
+
+                                      if(currentUser.uname == username){
+                                           return true;
+                                      }
+                              }
+                              return false;
+                          }
+
+                   }
+
+                   function isEmailExists(emailId){
+
+                        if(localStorage.getItem('users') !=null){
+
+                            var users=JSON.parse(localStorage.getItem('users'));
+
+                                for(var i=0; i<users.length;i++){
+
+                                var currentUser= users[i];
+
+                                if(currentUser.email == emailId){
+                                  return true;
+                                }
+
+    }
+    return false;
+}
+
+}
+          
+
+          
+          </script>
+     
+   </body>
+
+</html>

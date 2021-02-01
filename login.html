@@ -1,0 +1,84 @@
+<html>
+
+  <head>
+
+  </head>
+
+   <body>
+
+         <form>
+
+              emailId: <input type="text" id="emailId"> <br><br>
+             
+              Password: <input type="password" id="password"><br><br>
+
+              <button onclick="login()">Login</button>
+
+              <a target="_blank" href="forgotpwd.html">Forgot Password</a>
+              <a target="_blank" href="userdashboard.html">Change Password</a>
+
+         </form>
+         <script> 
+         
+              function login(){
+                  event.preventDefault();
+
+                  var emailId=document.getElementById("emailId").value;
+                  var password=document.getElementById("password").value;
+
+                    var emailExists= isEmailExists(emailId);
+
+                    console.log('emailExists',emailExists);
+
+                     if(emailExists){
+                           
+                        var users=JSON.parse(localStorage.getItem('users'));
+
+                            for(var i=0; i<users.length;i++){
+
+                            var currentUser= users[i];
+
+                            if(currentUser.pass == password){
+                                 
+                                 alert("login success");
+                            }     
+
+                            else
+                            {
+                                alert("password incorrect");
+                            }                 
+                   }
+
+                     }
+                     else
+                     {
+                         alert("email does not exist")
+                     }
+
+              }
+
+              function isEmailExists(emailId){
+
+     if(localStorage.getItem('users') !=null){
+
+    var users=JSON.parse(localStorage.getItem('users'));
+
+        for(var i=0; i<users.length;i++){
+
+        var currentUser= users[i];
+
+        if(currentUser.email == emailId){
+          return true;
+        }
+
+}
+return false;
+}
+              }
+              
+         </script>
+
+    </body>
+
+    </html>
+
